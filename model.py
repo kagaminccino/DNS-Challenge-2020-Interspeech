@@ -3,7 +3,9 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.nn.utils import rnn
 from sru import SRU
+from qtorch.quant import float_quantize
 
+import pdb
 
 class ConvBSRU(nn.Module):
     def __init__(self, frame_size, conv_channels, stride=128, num_layers=1, dropout=0.1, rescale=False, bidirectional=True):
@@ -59,3 +61,16 @@ class ConvBSRU(nn.Module):
         output = torch.tanh(output)
 
         return output
+
+    # def qua_weight(self, e_bits, m_bits):
+    #     for layer_name, layer in self.named_children():
+    #         print('layer_name =', layer_name)
+    #         if isinstance(layer, (nn.Conv1d, nn.ConvTranspose1d, nn.Linear, SRU)):
+    #             for param_name, param in layer.named_parameters():
+    #                 print('param_name =', param_name)
+    #                 if 'weight' in param_name:
+    #                     # print('param_name =', param_name)
+    #                     w = param
+    #                     w = float_quantize(w, exp=e_bits, man=m_bits, rounding="nearest")
+    #                     getattr(layer, param_name).data = w # which means layer.param_name.data = w
+    #         pdb.set_trace()

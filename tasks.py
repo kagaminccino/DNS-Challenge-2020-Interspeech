@@ -97,6 +97,11 @@ class DNS(pl.LightningModule):
 
         return outputs
 
+    # def training_step_end(self):
+    #     print('*'*50)
+    #     if self.hparams.e_bits != 8 or self.hparams.m_bits != 23:
+    #         self.net.qua_weight(self.hparams.e_bits, self.hparams.m_bits)
+
     def validation_step(self, batch, batch_idx):
         # OPTIONAL
         x, y, lens = batch
@@ -186,15 +191,6 @@ class DNS(pl.LightningModule):
                 shuffle=False, 
                 num_workers=4)
 
-    # @pl.hooks.ModelHooks
-    # def on_epoch_end(self):
-    #     pass
-
-
-
-
-
-
     '''
     def on_save_checkpoint(self, checkpoint):
         if self.save:
@@ -243,6 +239,9 @@ class DNS(pl.LightningModule):
         parser.add_argument('--track_grad_norm', default=-1, type=int)
         parser.add_argument('--log_save_interval', default=10, type=int)
         parser.add_argument('--accumulate_grad_batches', default=1, type=int)
+
+        parser.add_argument('--e_bits', default=8, type=int)
+        parser.add_argument('--m_bits', default=23, type=int)
 
         return parser
 
