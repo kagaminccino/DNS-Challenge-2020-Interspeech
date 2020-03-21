@@ -51,7 +51,8 @@ def main(hparams):
         train_percent_check=0.16666,
         val_percent_check=1.0,
         accumulate_grad_batches=hparams.accumulate_grad_batches,
-        checkpoint_callback=checkpoint_callback,
+        # checkpoint_callback=checkpoint_callback,
+        checkpoint_callback=False,
         early_stop_callback=early_stop_callback,
         logger=tt_logger
     )

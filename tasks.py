@@ -13,7 +13,7 @@ import pytorch_lightning as pl
 from model import ConvBSRU
 from datasets import DNS_Dataset
 from optimizsers import RAdam
-from ranger import Ranger
+# from ranger import Ranger
 
 from pesq import pesq
 # from PMSQE.pmsqe_torch import PMSQE
@@ -186,6 +186,15 @@ class DNS(pl.LightningModule):
                 shuffle=False, 
                 num_workers=4)
 
+    # @pl.hooks.ModelHooks
+    # def on_epoch_end(self):
+    #     pass
+
+
+
+
+
+
     '''
     def on_save_checkpoint(self, checkpoint):
         if self.save:
@@ -220,16 +229,16 @@ class DNS(pl.LightningModule):
         parser.add_argument('--bidirectional', action='store_true')
         parser.add_argument('--loss', default='l1', type=str)
 
-        parser.add_argument('--data_dir', default='/data/Corpus_temp/DNS-Challenge', type=str)
+        parser.add_argument('--data_dir', default='/Data/Dataset/DNS_Challenge', type=str)
         parser.add_argument('--seed', default=None, type=int)
 
         # training specific (for this model)
         parser.add_argument('--weights_summary', default='full', type=str)
         parser.add_argument('--max_nb_epochs', default=150, type=int)
         parser.add_argument('--min_nb_epochs', default=100, type=int)
-        parser.add_argument('--default_save_path', default='/data/member1/user_tahsieh/DNS', type=str)
-        parser.add_argument('--output_path', default='/data/member1/user_tahsieh/DNS/outputs', type=str)
-        parser.add_argument('--checkpoint_path', default='/data/member1/user_tahsieh/DNS/checkpoints', type=str)
+        parser.add_argument('--default_save_path', default='/Data/Code/DNS-Challenge-2020-Interspeech', type=str)
+        parser.add_argument('--output_path', default='/Data/Code/DNS-Challenge-2020-Interspeech/outputs', type=str)
+        parser.add_argument('--checkpoint_path', default='/Data/Code/DNS-Challenge-2020-Interspeech/checkpoints', type=str)
         parser.add_argument('--gradient_clip_val', default=0.02, type=float)
         parser.add_argument('--track_grad_norm', default=-1, type=int)
         parser.add_argument('--log_save_interval', default=10, type=int)

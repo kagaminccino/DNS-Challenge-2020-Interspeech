@@ -10,9 +10,7 @@ class DNS_Dataset(Dataset):
     def __init__(self, data_dir, stride, train=True):
         self.data_dir = data_dir
         self.train = train
-        if self.train:
-            self.data_dir += '-223'
-        self.tier = 'training' if train else 'datasets/test_set/synthetic/*'
+        self.tier = 'training' if train else 'test_set/synthetic/no_reverb'
 
         self.clean_root = os.path.join(self.data_dir, self.tier, 'clean')
         self.noisy_root = os.path.join(self.data_dir, self.tier, 'noisy')
