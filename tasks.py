@@ -19,6 +19,8 @@ from pesq import pesq
 # from PMSQE.pmsqe_torch import PMSQE
 # from pytorch_lamb import Lamb
 
+import pdb
+
 def cal(x, y, l):
     return pesq(16000, y[:l], x[:l], 'nb')
 
@@ -97,11 +99,6 @@ class DNS(pl.LightningModule):
 
         return outputs
 
-    # def training_step_end(self):
-    #     print('*'*50)
-    #     if self.hparams.e_bits != 8 or self.hparams.m_bits != 23:
-    #         self.net.qua_weight(self.hparams.e_bits, self.hparams.m_bits)
-
     def validation_step(self, batch, batch_idx):
         # OPTIONAL
         x, y, lens = batch
@@ -154,6 +151,10 @@ class DNS(pl.LightningModule):
         # optimizer = Ranger(self.parameters(), lr=self.hparams.learning_rate)
         
         return optimizer
+
+    def on_epoch_end(self):
+        if self.hparams.e_bits != 8 or self.hparams.m_bits != 23:
+            self.net.qua_weight(self.hparams.e_bits, self.hparams.m_bits)
 
     def collate_fn(self, batch):
         x = rnn.pad_sequence([item[0] for item in batch]).transpose(0, 1)
