@@ -9,7 +9,7 @@ import pytorch_lightning as pl
 from datasets import DNS_Dataset
 from tasks import DNS
 
-output_path = '/data/member1/user_tahsieh/DNS/outputs'
+output_path = '/Data/Code/DNS-Challenge-2020-Interspeech/outputs'
 
 model = DNS.load_from_metrics(
     weights_path='./saved/ckpt/pesq_ckpt_epoch_191.ckpt',
