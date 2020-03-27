@@ -9,11 +9,13 @@ import pytorch_lightning as pl
 from datasets import DNS_Dataset
 from tasks import DNS
 
-output_path = '/Data/Code/DNS-Challenge-2020-Interspeech/outputs'
+qua = 'e0m0'
+ckpt_num = 1
+output_path = '/Data/Code/DNS-Challenge-2020-Interspeech/outputs/qua_%s' % qua
 
 model = DNS.load_from_metrics(
-    weights_path='./saved/ckpt/pesq_ckpt_epoch_195.ckpt',
-    tags_csv='./saved/logs/version_0/meta_tags.csv',
+    weights_path='./saved/qua_%s/ckpt/pesq_ckpt_epoch_%d.ckpt' % (qua, ckpt_num),
+    tags_csv='./saved/qua_%s/logs/version_0/meta_tags.csv' % qua,
 )
 model.cuda()
 model.eval()
