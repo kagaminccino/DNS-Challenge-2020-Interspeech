@@ -153,6 +153,7 @@ class DNS(pl.LightningModule):
         return optimizer
 
     def on_epoch_end(self):
+    # def on_batch_end(self):
         if self.hparams.e_bits != 8 or self.hparams.m_bits != 23:
             self.net.qua_weight(self.hparams.e_bits, self.hparams.m_bits)
 

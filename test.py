@@ -9,7 +9,7 @@ import pytorch_lightning as pl
 from datasets import DNS_Dataset
 from tasks import DNS
 
-qua = 'e0m0'
+qua = 'e0m4'
 ckpt_num = 1
 output_path = '/Data/Code/DNS-Challenge-2020-Interspeech/outputs/qua_%s' % qua
 

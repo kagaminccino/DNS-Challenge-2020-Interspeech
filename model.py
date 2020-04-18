@@ -73,7 +73,7 @@ class ConvBSRU(nn.Module):
                 for param_name, param in layer.named_parameters():
                     # print('param_name =', param_name)
                     # print('before qua =', param.data)
-                    if (('weight' in param_name) or ('bias' in param_name)) and ('norm' not in param_name):
+                    if ('weight' in param_name) or ('bias' in param_name):
                         # print('param_name =', param_name)
                         qua_param = float_quantize(param, exp=e_bits, man=m_bits, rounding="nearest")
                         param.data = qua_param # which means layer.param_name.data = qua_param
